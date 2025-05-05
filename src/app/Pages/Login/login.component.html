@@ -1,0 +1,51 @@
+<div class="min-h-screen w-full flex flex-col md:flex-row items-center justify-center ">
+  <div class="items-center justify-center">
+    <img src="assets/image-login.png" alt="Login Image" class="w-full h-full"/>
+  </div>
+
+  <div class="h-full flex flex-row w-full p-6  bg-white bg-opacity-90">
+    <!-- Formulaire à gauche -->
+    <div class=" flex flex-col w-full h-full p-6">
+      <mat-card-title class="text-2xl font-bold text-center mb-4">Connexion</mat-card-title>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="w-full h-full">
+        <div class="mb-4">
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Nom d'utilisateur</mat-label>
+            <input matInput formControlName="username" type="username" class="p-2 border rounded"/>
+            <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
+              Le nom d'utilisateur est requis
+            </mat-error>
+            <mat-error *ngIf="loginForm.get('username')?.hasError('username')">
+              Le nom d'utilisateur invalide
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="mb-6">
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Mot de passe</mat-label>
+            <input matInput formControlName="password" type="password" class="p-2 border rounded"/>
+            <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+              Le mot de passe est requis
+            </mat-error>
+            <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
+              Au moins 6 caractères
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <button mat-raised-button color="primary" type="submit"
+                [disabled]="loginForm.invalid"
+                class="w-full py-2 rounded bg-blue-600 hover:bg-blue-700 text-white font-semibold">
+          Login
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="hidden md:flex w-1/2 h-screen items-center justify-center bg-gradient-to-b from-[#9181F4] to-[#5038ED]">
+    <img src="assets/background-login.png" alt="Login Image" class="w-full h-full"/>
+  </div>
+
+</div>

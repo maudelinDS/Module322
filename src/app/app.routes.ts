@@ -1,18 +1,10 @@
-import { Routes } from '@angular/router';
-import { ListeUtilisateursComponent } from './composants/liste-utilisateurs/liste-utilisateurs.component';
+import {Routes} from '@angular/router';
+import {ListeUtilisateursComponent} from './composants/liste-utilisateurs/liste-utilisateurs.component';
+import {LoginComponent} from './Pages/Login/login.component';
 
 export const routes: Routes = [
-  {
-    path: 'utilisateurs',
-    component: ListeUtilisateursComponent
-  },
-  {
-    path: '',
-    redirectTo: 'utilisateurs',
-    pathMatch: 'full'
-  },
-  {
-    path: '**',
-    redirectTo: 'utilisateurs'
-  }
+  {path: 'utilisateurs', component: ListeUtilisateursComponent},
+  {path: 'login', component: LoginComponent},
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: '**', redirectTo: 'login'}
 ];
