@@ -1,0 +1,10 @@
+{
+  "utilisateurs": [
+    { "id": 1, "nom": "Alice", "email": "alice@example.com" },
+    { "id": 2, "nom": "Bob",   "email": "bob@example.com" }
+  ],
+  "tâches": [
+    { "id": 1, "titre": "Faire le ménage", "fait": false },
+    { "id": 2, "titre": "Acheter du pain", "fait": true }
+  ]
+}
