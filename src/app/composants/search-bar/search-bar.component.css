@@ -1,0 +1,10 @@
+/* Applique un border-radius aux inputs */
+.search-control {
+  border-radius: 20px; /* Modifie cette valeur selon le degré d'arrondi que tu souhaites */
+  outline: none; /* Supprime le contour par défaut */
+}
+
+/* Optionnel : Arrondir les boutons aussi */
+.search-icon {
+  border-radius: 50%; /* Cela va arrondir les boutons */
+}

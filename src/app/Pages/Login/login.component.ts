@@ -47,7 +47,7 @@ export class LoginComponent {
         this.loginForm.value.password
       ).subscribe({
         next: () => {
-          this.router.navigate(['/utilisateurs']);
+          this.router.navigate(['/explore']);
         },
         error: err => {
           this.errorMsg = err.message;

@@ -1,0 +1,30 @@
+<div class="p-4 w-full flex items-center justify-center">
+  <div class="p-4 w-[80%]">
+  <mat-toolbar class="search-control ">
+    <mat-toolbar-row style="padding: 0 5px; display: flex; flex-direction: row; justify-content: space-between;">
+      <button class="search-icon" type="button" mat-icon-button>
+        <mat-icon (click)="showFilter = !showFilter">filter_list</mat-icon>
+      </button>
+
+      <!-- Input avec bord arrondi -->
+      <input type="text" (ngModelChange)="onSearch()" placeholder="Rechercher une ballade" [(ngModel)]="searchQuery" #searchbar>
+
+      <button class="search-icon" mat-icon-button >
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>
+</div>
+
+<!-- Champ de filtre affiché dynamiquement -->
+<div *ngIf="showFilter" class="mt-4">
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Filtrer par catégorie</mat-label>
+    <mat-select [(ngModel)]="selectedCategory" (selectionChange)="onFilterChange()">
+      <mat-option *ngFor="let category of categories" [value]="category">
+        {{ category }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

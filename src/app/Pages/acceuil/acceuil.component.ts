@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import {SearchBarComponent} from '../../composants/search-bar/search-bar.component';
 
 @Component({
   selector: 'app-acceuil',
-  imports: [],
+  imports: [
+    SearchBarComponent
+  ],
   templateUrl: './acceuil.component.html',
   styleUrl: './acceuil.component.css'
 })
