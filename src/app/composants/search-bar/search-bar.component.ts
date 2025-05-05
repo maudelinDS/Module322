@@ -20,14 +20,11 @@ import {MatToolbar, MatToolbarModule} from '@angular/material/toolbar';
     MatSelect,
     FormsModule,
     MatOption,
-    MatInput,
     NgForOf,
     MatIconButton,
-    MatTooltip,
     MatIcon,
     NgIf,
     MatToolbarModule,
-    MatButton,
   ],
   styleUrls: ['./search-bar.component.css']
 })

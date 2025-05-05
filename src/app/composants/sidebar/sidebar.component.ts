@@ -29,7 +29,7 @@ export class SidebarComponent {
 
 
   logout() {
-    localStorage.removeItem('currentUser');
+    this.authService.logout()
     this.router.navigate(['/login']);
   }
 }

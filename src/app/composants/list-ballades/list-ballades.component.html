@@ -1,0 +1,16 @@
+<mat-list class="text-gray-600">
+  <mat-list-item *ngFor="let u of ballades">
+    <mat-icon matListIcon>person</mat-icon>
+    <div class="flex flex-row gap-6 pb-4 pt-4 justify-between">
+      <img [src]="u.image"
+           alt="{{ u.titre }}"
+           class="w-16 h-16 object-cover">
+
+      <div class="w-full text-xs">
+        <h4 matLine>{{ u.titre }}</h4>
+        <small matLine>{{ u.description }}</small>
+      </div>
+    </div>
+  </mat-list-item>
+</mat-list>
+

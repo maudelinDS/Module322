@@ -1,6 +1,6 @@
 /* Applique un border-radius aux inputs */
 .search-control {
-  border-radius: 20px; /* Modifie cette valeur selon le degré d'arrondi que tu souhaites */
+  border-radius: 50px; /* Modifie cette valeur selon le degré d'arrondi que tu souhaites */
   outline: none; /* Supprime le contour par défaut */
 }
 
