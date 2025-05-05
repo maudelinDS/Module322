@@ -6,6 +6,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {NgIf} from '@angular/common';
+import {AuthService} from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -23,10 +24,12 @@ import {NgIf} from '@angular/common';
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  errorMsg: string | undefined;
 
-  constructor(private fb: FormBuilder
-    ,
-              private router: Router
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService
   ) {
     this
       .loginForm = this.fb.group({
@@ -36,12 +39,21 @@ export class LoginComponent {
 
   }
 
+
   onSubmit() {
     if (this.loginForm.valid) {
-      // TODO: call auth service
-      console.log('Logged in:', this.loginForm.value);
-      // Navigate to home or dashboard
-      this.router.navigate(['/utilisateurs']);
+      this.authService.login(
+        this.loginForm.value.username,
+        this.loginForm.value.password
+      ).subscribe({
+        next: () => {
+          this.router.navigate(['/utilisateurs']);
+        },
+        error: err => {
+          this.errorMsg = err.message;
+        }
+      });
     }
   }
+
 }

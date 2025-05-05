@@ -39,6 +39,8 @@
                 class="w-full py-2 rounded bg-blue-600 hover:bg-blue-700 text-white font-semibold">
           Login
         </button>
+        <div *ngIf="errorMsg" class="text-red-600 mt-2">{{ errorMsg }}</div>
+
       </form>
     </div>
   </div>
