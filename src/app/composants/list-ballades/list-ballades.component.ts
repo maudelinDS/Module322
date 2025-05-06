@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatList, MatListItem} from "@angular/material/list";
 import {NgForOf} from "@angular/common";
 import {UserService, Utilisateur} from '../../services/users/users.service';
@@ -21,12 +21,17 @@ import {MatIcon} from '@angular/material/icon';
   styleUrl: './list-ballades.component.css'
 })
 export class ListBalladesComponent implements OnInit {
-  ballades: Ballades[] = [];
+  @Input() ballades: Ballades[] = [];
+  @Output() selected = new EventEmitter<Ballades>();
 
-  constructor(private api: BalladesService) {
+
+  constructor() {
   }
 
   ngOnInit() {
-    this.api.getBallades().subscribe(data => this.ballades = data);
+  }
+
+  onSelect(b: Ballades) {
+    this.selected.emit(b);
   }
 }

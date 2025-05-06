@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {NgIf} from '@angular/common';
 import {AuthService} from '../../services/auth/auth.service';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,7 +10,8 @@ import {AuthService} from '../../services/auth/auth.service';
     RouterLink,
     RouterLinkActive,
     NgIf,
-    RouterOutlet
+    RouterOutlet,
+    MatIcon
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'

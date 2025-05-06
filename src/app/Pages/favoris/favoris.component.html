@@ -1,1 +1,122 @@
-<p>favoris works!</p>
+<!-- LISTE PRINCIPALE -->
+
+<div *ngIf="!showCardDetail" class="p-12 h-full flex flex-col md:justify-between">
+  <p class="md:hidden w-full text-center mb-4 text-3xl font-medium">Vestigia</p>
+
+  <app-search-bar (searchChange)="onSearchChanged($event)">
+    <div filter-options>
+      <label class="block mb-2">
+        <span class="text-sm text-gray-600">Filtres</span>
+        <select class="w-full border rounded p-2">
+          <option value="">Tous</option>
+          <option *ngFor="let filter of filtres" [value]="filter.id">
+            {{ filter.name }}
+          </option>
+        </select>
+      </label>
+    </div>
+  </app-search-bar>
+
+  <h1 class="text-2xl font-medium mb-6">Mes Favoris</h1>
+
+  <div *ngIf="favoris.length <= 0" class="w-full">
+
+    <p class="p-4 bg-gray-600 text-white rounded-lg text-center">
+      Aucun favoris pour l'instant ?
+    </p>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    <app-card-ballade
+      *ngFor="let b of filteredFavoris"
+      (click)="showBalladeDetail(b)"
+      [title]="b.titre"
+      [content]="b.description"
+      [imageUrl]="b.image"
+      class="cursor-pointer transform hover:scale-105 transition-transform duration-300"
+    >
+
+    </app-card-ballade>
+  </div>
+</div>
+
+<!-- DÉTAIL DE LA BALLADE SÉLECTIONNÉE -->
+<div *ngIf="showCardDetail" class="p-6 max-w-4xl mx-auto space-y-6">
+
+  <!-- Toolbar avec bouton Back -->
+  <mat-toolbar color="primary" class="rounded-xl mb-4">
+    <button mat-icon-button (click)="showCardDetail = false">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span class="ml-2 text-lg font-semibold">{{ selectedBallades.titre }}</span>
+  </mat-toolbar>
+
+  <!-- Image + contrôle des étapes-->
+  <div class="bg-white rounded-xl shadow-lg overflow-hidden mt-6">
+    <img [src]="selectedBallades.image"
+         alt="{{ selectedBallades.titre }}"
+         class="w-full h-64 object-cover">
+
+
+  </div>
+  <div>
+    <div
+      class=" flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
+      <!-- Boutons numérotés -->
+      <div class="flex space-x-2">
+        <button mat-button class="rounded-full border border-gray-300 flex items-center gap-1">
+          <mat-icon fontIcon="map" aria-hidden="false" aria-label="Distance">straighten</mat-icon>
+          {{ selectedBallades.km }} Km
+        </button>
+        <button mat-button class="rounded-full border border-gray-300 flex items-center gap-1">
+          <mat-icon>place</mat-icon>
+          {{ selectedBallades.place }}
+        </button>
+        <button mat-button class="rounded-full border border-gray-300 flex items-center gap-1">
+          <mat-icon>access_time</mat-icon>
+          {{ selectedBallades.date }}
+        </button>
+        <button mat-button class="rounded-full border border-gray-300 flex items-center gap-1">
+          <mat-icon>event</mat-icon>
+          {{ selectedBallades.open }}
+        </button>
+      </div>
+
+      <button mat-flat-button
+              color="accent"
+              class="flex items-center gap-2"
+              (click)="toggleFavorite()">
+        <mat-icon>
+          {{ selectedBallades.favoris ? 'favorite' : 'favorite_border' }}
+        </mat-icon>
+        {{ selectedBallades.favoris ? 'Enregistré' : 'Ajouter' }}
+      </button>
+    </div>
+  </div>
+  <!-- Plus d'informations -->
+  <div class="space-y-4">
+    <h3 class="text-xl font-semibold">Plus d'informations</h3>
+    <p class="text-gray-700">{{ selectedBallades.description }}</p>
+
+    <!-- Carte Google Maps sans clé API -->
+    <mat-card class="overflow-hidden rounded-lg shadow-md">
+      <iframe
+        class="w-full h-64"
+        frameborder="0" style="border:0"
+        [src]="mapUrl"
+        allowfullscreen>
+      </iframe>
+    </mat-card>
+  </div>
+
+
+  <div>
+    <h3 class="text-2xl gap-6 flex items-center justify-start font-bold mb-6">Autres Ballades
+      <mat-icon>arrow_right_alt</mat-icon>
+    </h3>
+
+    <app-list-ballades
+      [ballades]="otherBallades"
+      (selected)="showBalladeDetail($event)">
+    </app-list-ballades>
+  </div>
+</div>

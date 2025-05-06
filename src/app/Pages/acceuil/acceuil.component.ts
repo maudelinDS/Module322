@@ -9,6 +9,7 @@ import {MatIcon} from '@angular/material/icon';
 import {ListBalladesComponent} from '../../composants/list-ballades/list-ballades.component';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {MatCardModule} from '@angular/material/card';
+import {Filtres, FiltresService} from '../../services/filtres/filtres.service';
 
 @Component({
   selector: 'app-acceuil',
@@ -30,36 +31,78 @@ import {MatCardModule} from '@angular/material/card';
 export class AcceuilComponent implements OnInit {
 
   ballades: Ballades[] = [];
-  showCardDetail: boolean = false;
-  selectedBallades: any ;
-
+  filtres: Filtres[] = [];
+  filteredBallades: Ballades[] = [];
+  showCardDetail = false;
+  selectedBallades!: Ballades;
   mapUrl!: SafeResourceUrl;
-
+  selectedFilterId: string = '';
 
   constructor(
     private balladesService: BalladesService,
+    private filterService: FiltresService,
     private sanitizer: DomSanitizer
-
   ) {
   }
 
+  ngOnInit() {
+    this.balladesService.getBallades().subscribe((data: Ballades[]) => {
+      this.ballades = data;
+      this.filteredBallades = data; // initialement tout
+
+
+    });
+    this.getFilters()
+  }
+
+  getFilters() {
+    this.filterService.getFiltres().subscribe((data: Filtres[]) => {
+      this.filtres = data;
+console.log(data)
+
+    });
+  }
+
   showBalladeDetail(ballade: Ballades) {
-    this.showCardDetail = !this.showCardDetail
+    this.selectedBallades = ballade;
+    this.showCardDetail = true;
 
-    this.selectedBallades = ballade
-    console.log(this.selectedBallades)
-
-    // Construis l'URL embed sans API key
-    const query = encodeURIComponent(this.selectedBallades.titre);
+    const query = encodeURIComponent(ballade.titre);
     const url = `https://maps.google.com/maps?q=${query}&output=embed`;
     this.mapUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+
+    window.scrollTo({top: 0, behavior: 'smooth'});
+
   }
 
-  ngOnInit() {
-    this.balladesService.getBallades().subscribe(
-      data => {
-        this.ballades = data
-        console.log(data)
-      });
+  get otherBallades(): Ballades[] {
+    return this.ballades.filter(b => b.id !== this.selectedBallades?.id);
   }
+
+  // inverse le statut favoris et met à jour via le service
+  toggleFavorite() {
+    // inverse localement
+    this.selectedBallades.favoris = !this.selectedBallades.favoris;
+    // Envoie l'objet complet à l'API
+    this.balladesService
+      .updateBalladeFull(this.selectedBallades)
+      .subscribe(updated => {
+        this.selectedBallades = updated;
+      });
+
+  }
+
+
+  onSearchChanged(query: string) {
+    const lowerQuery = query.toLowerCase();
+    this.filteredBallades = this.ballades.filter(b =>
+      (b.titre.toLowerCase().includes(lowerQuery) || b.description.toLowerCase().includes(lowerQuery)) &&
+      (this.selectedFilterId === '' || b.filter_id === +this.selectedFilterId)
+    );
+  }
+  onFilterChanged(filterId: string) {
+    this.selectedFilterId = filterId;
+    this.onSearchChanged(''); // ou garde la dernière requête de recherche si tu veux combiner
+  }
+
 }

@@ -38,6 +38,17 @@ export class AuthService {
   logout() {
     localStorage.removeItem('currentUser');
   }
+  getCurrentUserId(): number | null {
+    const user = localStorage.getItem('currentUser');
+    if (user) {
+      try {
+        return JSON.parse(user).id;
+      } catch {
+        return null;
+      }
+    }
+    return null;
+  }
 
   get isLoggedIn(): boolean {
     return !!localStorage.getItem('currentUser');

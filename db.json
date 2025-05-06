@@ -1,64 +1,104 @@
 {
   "utilisateurs": [
-    { "id": 1, "nom": "Alice", "email": "alice@example.com", "username": "alice", "password": "alicepass" },
-    { "id": 2, "nom": "Bob",   "email": "bob@example.com",   "username": "bob",   "password": "bobpass" }
+    {
+      "id": "1",
+      "first_name": "Alice",
+      "last_name": "Alice",
+      "email": "alice@example.com",
+      "genre": "femme",
+      "langue": "Francais",
+      "Pays": "Suisse",
+      "Phone": "0782986578",
+      "username": "alice",
+      "password": "alicepass"
+    },
+    {
+      "id": "2",
+      "first_name": "Bob",
+      "last_name": "Bob",
+      "email": "bob@example.com",
+      "genre": "homme",
+      "langue": "Francais",
+      "pays": "Suisse",
+      "phone": "0786543576",
+      "username": "bob",
+      "password": "bobpass"
+    }
+  ],
+  "filtres": [
+    {
+      "id": "1",
+      "name": "Châteaux"
+    },
+    {
+      "id": "2",
+      "name": "Monuments"
+    },
+    {
+      "id": "3",
+      "name": "Religieuses"
+    }
   ],
   "ballades": [
     {
-      "id": 1,
+      "id": "1",
       "titre": "Promenade au bord du lac",
       "description": "Une agréable balade autour du lac Léman avec vue sur les montagnes.",
       "image": "./assets/ballade-1.jpg",
       "km": 25,
       "place": "Lausanne",
       "open": "24/7",
-      "date": "01/02/1981"
-
+      "date": "01/02/1981",
+      "favoris": true,
+      "filter_id": 1
     },
     {
-      "id": 2,
+      "id": "2",
       "titre": "Randonnée dans les Alpes",
       "description": "Un sentier de montagne pour les amateurs de nature et de hauteur.",
       "image": "./assets/ballade-2.png",
       "km": 12,
       "place": "Sion",
       "open": "24/7",
-      "date": "03/06/1881"
-
+      "date": "03/06/1881",
+      "favoris": true,
+      "filter_id": 1
     },
     {
-      "id": 3,
+      "id": "3",
       "titre": "Visite du parc botanique",
       "description": "Une balade paisible au milieu des fleurs et des plantes exotiques.",
       "image": "./assets/ballade-3.png",
       "km": 6,
       "place": "Morges",
       "open": "24/7",
-      "date": "03/06/1889"
-
+      "date": "03/06/1889",
+      "favoris": false,
+      "filter_id": 2
     },
     {
-      "id": 4,
+      "id": "4",
       "titre": "Circuit urbain historique",
       "description": "Découvrez le patrimoine architectural de la ville en suivant ce parcours historique.",
       "image": "./assets/ballade-4.jpg",
       "km": 30,
       "place": "Zurich",
       "open": "24/7",
-      "date": "03/02/2000"
-
+      "date": "03/02/2000",
+      "favoris": false,
+      "filter_id": 1
     },
     {
-      "id": 5,
+      "id": "5",
       "titre": "Chemin forestier secret",
       "description": "Un sentier méconnu à travers une forêt dense, idéal pour les amoureux de la tranquillité.",
       "image": "./assets/ballade-4.jpg",
       "km": 30,
       "place": "Bâle",
       "open": "24/7",
-      "date": "05/09/1900"
-
+      "date": "05/09/1900",
+      "favoris": false,
+      "filter_id": 3
     }
   ]
-
 }
