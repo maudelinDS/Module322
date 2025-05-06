@@ -37,6 +37,7 @@ export class AcceuilComponent implements OnInit {
   selectedBallades!: Ballades;
   mapUrl!: SafeResourceUrl;
   selectedFilterId: string = '';
+  isLoading: boolean = false
 
   constructor(
     private balladesService: BalladesService,
@@ -46,20 +47,26 @@ export class AcceuilComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.balladesService.getBallades().subscribe((data: Ballades[]) => {
-      this.ballades = data;
-      this.filteredBallades = data; // initialement tout
 
-
-    });
     this.getFilters()
+    this.getBallades()
   }
 
   getFilters() {
+    this.isLoading = true
     this.filterService.getFiltres().subscribe((data: Filtres[]) => {
       this.filtres = data;
-console.log(data)
+      this.isLoading = false
 
+    });
+  }
+
+  getBallades() {
+    this.isLoading = true
+    this.balladesService.getBallades().subscribe((data: Ballades[]) => {
+      this.ballades = data;
+      this.filteredBallades = data
+      this.isLoading = false
     });
   }
 
@@ -100,6 +107,7 @@ console.log(data)
       (this.selectedFilterId === '' || b.filter_id === +this.selectedFilterId)
     );
   }
+
   onFilterChanged(filterId: string) {
     this.selectedFilterId = filterId;
     this.onSearchChanged(''); // ou garde la dernière requête de recherche si tu veux combiner

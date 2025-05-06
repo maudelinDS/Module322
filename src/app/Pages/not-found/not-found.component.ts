@@ -7,7 +7,6 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-not-found',
   imports: [
-    MatCard,
     MatIcon,
     MatButton,
   ],

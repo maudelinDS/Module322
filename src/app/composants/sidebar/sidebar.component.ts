@@ -31,7 +31,11 @@ export class SidebarComponent {
 
 
   logout() {
-    this.authService.logout()
-    this.router.navigate(['/login']);
+    this.authService.logout();
+    // on navigue d’abord vers '/login' (ou '/'), puis on reload
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload();
+    });
   }
+
 }

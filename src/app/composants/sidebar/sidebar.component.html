@@ -20,31 +20,32 @@
     </div>
 
     <!-- Liens -->
-    <a routerLink="/explore" routerLinkActive="bg-[#E8DEF8] flex flex-col md:flex-row"
-       class="flex items-center gap-2 p-2 rounded hover:bg-[#E8DEF8] md:rounded-full">
+    <a routerLink="/explore" routerLinkActive="bg-[#E8DEF8]"
+       class="w-full flex justify-start flex-col items-center gap-2 p-2 md:flex-row rounded hover:bg-[#E8DEF8] md:rounded-full">
       <mat-icon>place</mat-icon>
-      Explorer
+      <p>Explorer</p>
     </a>
 
-    <a routerLink="/account" routerLinkActive="bg-[#E8DEF8] flex flex-col md:flex-row"
-       class="flex items-center gap-2 p-2 rounded hover:bg-[#E8DEF8] md:rounded-full">
+    <a routerLink="/account" routerLinkActive="bg-[#E8DEF8]"
+       class="w-full flex justify-start flex-col items-center gap-2 p-2 md:flex-row rounded hover:bg-[#E8DEF8] md:rounded-full">
       <mat-icon>person</mat-icon>
-      Compte
+      <p>Compte</p>
     </a>
 
 
 
 
-    <a routerLink="/favoris" routerLinkActive="bg-[#E8DEF8] flex flex-col md:flex-row"
-       class="flex items-center gap-2 p-2 rounded hover:bg-[#E8DEF8] md:rounded-full">
+    <a routerLink="/favoris" routerLinkActive="bg-[#E8DEF8]"
+       class="w-full flex justify-start flex-col items-center gap-2 p-2 md:flex-row rounded hover:bg-[#E8DEF8] md:rounded-full">
       <mat-icon>favorite</mat-icon>
-      Favoris
+      <p>Favoris</p>
     </a>
 
 
     <a (click)="logout()"
-       class="p-2 rounded-full md:w-full bg-red-600 hover:bg-red-700 text-center text-white cursor-pointer md:mt-auto">
-      Déconnexion
+       class="w-full flex justify-start flex-col items-center gap-2 p-2 md:flex-row rounded hover:bg-[#E8DEF8] md:rounded-full">
+      <mat-icon>logout</mat-icon>
+<p>Logout</p>
     </a>
   </nav>
 

@@ -36,6 +36,7 @@ export class FavorisComponent implements  OnInit{
   showCardDetail = false;
   selectedBallades!: Ballades;
   mapUrl!: SafeResourceUrl;
+  isLoading: boolean = false
 
   constructor(
     private balladesService: BalladesService,
@@ -44,12 +45,8 @@ export class FavorisComponent implements  OnInit{
   ) {}
 
   ngOnInit() {
-    this.balladesService.getFavoriteBallades().subscribe((data: Ballades[]) => {
-      // Ne garde que ceux à `favoris === true`
-      this.favoris = data;
-      this.filteredFavoris = data; // initialement tout
 
-    });
+    this.getFavorisBallades()
     this.getFilters()
   }
 
@@ -82,9 +79,21 @@ export class FavorisComponent implements  OnInit{
 
   }
   getFilters() {
+    this.isLoading = true
+
     this.filterService.getFiltres().subscribe((data: Filtres[]) => {
       this.filtres = data;
-      console.log(data)
+      this.isLoading = false
+    });
+  }
+  getFavorisBallades() {
+    this.isLoading = true
+
+    this.balladesService.getFavoriteBallades().subscribe((data: Ballades[]) => {
+      // Ne garde que ceux à `favoris === true`
+      this.favoris = data;
+      this.filteredFavoris = data; // initialement tout
+      this.isLoading = false
 
     });
   }

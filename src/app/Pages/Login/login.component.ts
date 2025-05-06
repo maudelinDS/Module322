@@ -5,7 +5,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-import {NgIf, NgOptimizedImage} from '@angular/common';
+import {NgIf} from '@angular/common';
 import {AuthService} from '../../services/auth/auth.service';
 
 @Component({
@@ -18,7 +18,6 @@ import {AuthService} from '../../services/auth/auth.service';
     MatInputModule,
     MatButtonModule,
     NgIf,
-    NgOptimizedImage
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
@@ -26,6 +25,7 @@ import {AuthService} from '../../services/auth/auth.service';
 export class LoginComponent implements OnInit{
   loginForm!: FormGroup;
   errorMsg: string | undefined;
+  isLoading: boolean = false
 
   constructor(
     private fb: FormBuilder,
@@ -44,15 +44,21 @@ ngOnInit() {
 }
 
   onSubmit() {
+    this.isLoading = true
     if (this.loginForm.valid) {
       this.authService.login(
         this.loginForm.value.username,
         this.loginForm.value.password
       ).subscribe({
         next: () => {
-          this.router.navigate(['/explore']);
+          this.isLoading = false
+          this.router.navigate(['/explore']).then(() => {
+            window.location.reload();
+
+          });
         },
         error: err => {
+          this.isLoading = false
           this.errorMsg = err.message;
         }
       });

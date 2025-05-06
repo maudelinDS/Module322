@@ -27,6 +27,7 @@ export class AccountComponent implements OnInit {
   user: any = [];
   idUserConnected: number = 0;
   userForm!: FormGroup;
+  isLoading: boolean = false
 
   constructor(
     private authService: AuthService,
@@ -57,20 +58,37 @@ export class AccountComponent implements OnInit {
     }
   }
   updateUser() {
+    this.isLoading = true
     if (this.userForm.valid) {
       const updatedUser = this.userForm.getRawValue();
       this.userService.updateUtilisateur(this.idUserConnected, updatedUser).subscribe({
-        next: () => alert('Profil mis à jour avec succès !'),
-        error: err => console.error('Erreur de mise à jour', err)
+        next: () => {
+          this.isLoading = false
+
+          alert('Profil mis à jour avec succès !')
+        },
+        error: err => {
+          console.error('Erreur de mise à jour', err)
+          this.isLoading = false
+
+        }
       });
     }
   }
   getUserById() {
-      this.userService.getUtilisateur(this.idUserConnected).subscribe({
+    this.isLoading = true
+
+    this.userService.getUtilisateur(this.idUserConnected).subscribe({
         next: (data) => {
           this.user = data
+          this.isLoading = false
+
         },
-        error: err => console.error('Erreur de mise à jour', err)
+        error: err => {
+          this.isLoading = false
+
+          console.error('Erreur de mise à jour', err)
+        }
       });
 
   }
