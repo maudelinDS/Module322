@@ -5,48 +5,48 @@
 
   <!-- Sidebar : en bas sur mobile, à gauche sur desktop -->
   <nav [class.hidden]="!isOpen"
-       class="fixed bottom-0  left-0 md:left-auto w-full md:w-64 bg-[#F7F2FA] text-[#49454F]
+       class="fixed bottom-0  left-0 md:left-auto w-full md:w-[209px] bg-[#F7F2FA] text-[#49454F]
               flex md:flex-col flex-row justify-around md:justify-start items-center md:items-start
                md:p-6 md:space-y-4 z-40 shadow-lg md:h-full h-16">
 
-    <!-- En-tête : uniquement visible en desktop -->
-    <div class="hidden md:flex flex-row justify-between items-center mb-6 w-full">
-      <div class="text-2xl font-bold">Vestigia</div>
-      <!-- Bouton Fermer (mobile seulement, masqué en desktop) -->
-      <button (click)="toggleSidebar()"
-              class="md:hidden p-2 bg-indigo-600 hover:bg-indigo-800 rounded text-white">
-        ✕
-      </button>
+
+    <div class="flex md:flex-col gap-2 w-full">
+      <!-- En-tête : uniquement visible en desktop -->
+      <div class="hidden md:flex flex-row justify-between items-center mb-6 w-full">
+        <div class="text-2xl font-medium">Vestigia</div>
+        <!-- Bouton Fermer (mobile seulement, masqué en desktop) -->
+        <button (click)="toggleSidebar()"
+                class="md:hidden p-2 bg-indigo-600 hover:bg-indigo-800 rounded text-white">
+          ✕
+        </button>
+      </div>
+
+      <!-- Liens -->
+      <a routerLink="/explore" routerLinkActive="bg-[#E8DEF8]"
+         class="w-full flex justify-start flex-col items-center gap-2 p-4 md:flex-row rounded hover:bg-[#E8DEF8] md:rounded-full">
+        <mat-icon>place</mat-icon>
+        <p>Explorer</p>
+      </a>
+
+      <a routerLink="/account" routerLinkActive="bg-[#E8DEF8]"
+         class="w-full flex justify-start flex-col items-center gap-2 p-4 md:flex-row rounded hover:bg-[#E8DEF8] md:rounded-full">
+        <mat-icon>person</mat-icon>
+        <p>Compte</p>
+      </a>
+
+
+      <a routerLink="/favoris" routerLinkActive="bg-[#E8DEF8]"
+         class="w-full flex justify-start flex-col items-center gap-2 p-4 md:flex-row rounded hover:bg-[#E8DEF8] md:rounded-full">
+        <mat-icon>favorite</mat-icon>
+        <p>Favoris</p>
+      </a>
+      <div class="hidden md:block border-t border-2 border-[#CAC4D0] my-2"></div>
     </div>
-
-    <!-- Liens -->
-    <a routerLink="/explore" routerLinkActive="bg-[#E8DEF8]"
-       class="w-full flex justify-start flex-col items-center gap-2 p-2 md:flex-row rounded hover:bg-[#E8DEF8] md:rounded-full">
-      <mat-icon>place</mat-icon>
-      <p>Explorer</p>
-    </a>
-
-    <a routerLink="/account" routerLinkActive="bg-[#E8DEF8]"
-       class="w-full flex justify-start flex-col items-center gap-2 p-2 md:flex-row rounded hover:bg-[#E8DEF8] md:rounded-full">
-      <mat-icon>person</mat-icon>
-      <p>Compte</p>
-    </a>
-
-
-
-
-    <a routerLink="/favoris" routerLinkActive="bg-[#E8DEF8]"
-       class="w-full flex justify-start flex-col items-center gap-2 p-2 md:flex-row rounded hover:bg-[#E8DEF8] md:rounded-full">
-      <mat-icon>favorite</mat-icon>
-      <p>Favoris</p>
-    </a>
-
-
-    <a (click)="logout()"
-       class="w-full flex justify-start flex-col items-center gap-2 p-2 md:flex-row rounded hover:bg-[#E8DEF8] md:rounded-full">
+    <!--<a (click)="logout()"
+       class="w-full flex justify-start flex-col items-center gap-2 p-4 md:flex-row rounded hover:bg-[#E8DEF8] md:rounded-full">
       <mat-icon>logout</mat-icon>
-<p>Logout</p>
-    </a>
+      <p>Logout</p>
+    </a>-->
   </nav>
 
   <!-- Bouton d’ouverture (uniquement mobile) -->

@@ -32,10 +32,14 @@
     },
     {
       "id": "2",
-      "name": "Monuments"
+      "name": "Châteaux"
     },
     {
       "id": "3",
+      "name": "Monuments"
+    },
+    {
+      "id": "4",
       "name": "Religieuses"
     }
   ],

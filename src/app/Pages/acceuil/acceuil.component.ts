@@ -51,11 +51,16 @@ export class AcceuilComponent implements OnInit {
     this.getFilters()
     this.getBallades()
   }
-
+  myFilters = [
+    { key: 'genre', label: 'Genre', type: 'select', options: ['Rock', 'Jazz'], value: '' },
+    { key: 'auteur', label: 'Auteur', type: 'text', value: '' },
+    { key: 'date', label: 'Date', type: 'date', value: '' }
+  ];
   getFilters() {
     this.isLoading = true
     this.filterService.getFiltres().subscribe((data: Filtres[]) => {
       this.filtres = data;
+      console.log(data)
       this.isLoading = false
 
     });
@@ -100,17 +105,12 @@ export class AcceuilComponent implements OnInit {
   }
 
 
-  onSearchChanged(query: string) {
-    const lowerQuery = query.toLowerCase();
-    this.filteredBallades = this.ballades.filter(b =>
-      (b.titre.toLowerCase().includes(lowerQuery) || b.description.toLowerCase().includes(lowerQuery)) &&
-      (this.selectedFilterId === '' || b.filter_id === +this.selectedFilterId)
-    );
+  handleSearch(query: string) {
+    console.log('Recherche :', query);
   }
 
-  onFilterChanged(filterId: string) {
-    this.selectedFilterId = filterId;
-    this.onSearchChanged(''); // ou garde la dernière requête de recherche si tu veux combiner
+  handleFilters(filters: Record<string, any>) {
+    console.log('Filtres reçus du composant enfant :', filters);
   }
 
 }

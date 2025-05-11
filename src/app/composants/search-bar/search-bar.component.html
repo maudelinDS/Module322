@@ -1,27 +1,38 @@
-<div class="mb-6 w-full flex flex-col justify-center items-center">
-  <mat-toolbar class="search-control ">
-    <mat-toolbar-row style="padding: 0 5px; display: flex; flex-direction: row; justify-content: space-between;">
-      <button class="search-icon" type="button" mat-icon-button>
-        <mat-icon (click)="showFilter = !showFilter">filter_list</mat-icon>
-      </button>
+<div class="flex items-center mb-6 justify-center w-full">
+  <div class="w-full relative">
+    <mat-toolbar class="search-control">
+      <mat-toolbar-row style="padding: 0 5px; display: flex; justify-content: space-between;">
+        <button mat-icon-button (click)="showFilter = !showFilter" #filterOrigin>
+          <mat-icon>tune</mat-icon>
+        </button>
 
-      <input
-        type="text"
-        [(ngModel)]="searchQuery"
-        (ngModelChange)="onSearch()"
-        class="text-lg"
-        placeholder="Rechercher une ballade"
-      >
+        <input
+          type="text"
+          [(ngModel)]="searchQuery"
+          (ngModelChange)="onSearch()"
+          placeholder="Rechercher une ballade"
+          class="w-full ml-2 text-lg flex justify-start"
+        >
 
-      <button class="search-icon" mat-icon-button>
-        <mat-icon>search</mat-icon>
-      </button>
-    </mat-toolbar-row>
-  </mat-toolbar>
+        <button mat-icon-button>
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-toolbar-row>
+    </mat-toolbar>
 
-  <div *ngIf="showFilter" class="w-full bg-gray-100 rounded-b-xl p-4 shadow-md">
-    <ng-content select="[filter-options]"></ng-content>
+    <!-- Panneau de filtres fixé, ne bouge pas au scroll -->
+    <div *ngIf="showFilter"
+         class=" w-[200px] shadow-lg ml-26 transform -translate-x-1/2
+                bg-[#F3EDF7] rounded-l z-50 p-2">
+      <ng-container *ngFor="let filter of filters">
+        <div
+          class="p-4 rounded cursor-pointer hover:bg-gray-100"
+          [ngClass]="{'bg-gray-300': filter.value === filter.id}"
+          (click)="selectFilter(filter)">
+          {{ filter.name }}
+        </div>
+      </ng-container>
+    </div>
+
   </div>
-
-
 </div>

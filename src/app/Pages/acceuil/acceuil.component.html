@@ -1,37 +1,31 @@
 <!-- LISTE PRINCIPALE -->
-<div *ngIf="!showCardDetail" class="p-12 h-full mb-24 flex flex-col md:justify-between">
+<div *ngIf="!showCardDetail" class="p-6  h-full mb-24 flex flex-col md:justify-between">
   <p class="md:hidden w-full text-center mb-4 text-3xl font-medium">Vestigia</p>
+  <div class="w-full flex items-center justify-center">
 
-  <app-search-bar (searchChange)="onSearchChanged($event)">
-    <div filter-options>
-      <label class="block mb-2">
-        <span class="text-sm text-gray-600">Filtre</span>
-        <select
-          #selectRef
-          class="w-full border rounded p-2"
-          (change)="onFilterChanged(selectRef.value)"
+    <div class="md:w-[80%] w-[90%]">
+      <app-search-bar
+        [filters]="filtres"
+        (searchChange)="handleSearch($event)"
+        (filterChange)="handleFilters($event)"
+        class=" ">
+
         >
-          <option value="">Tous</option>
-          <option *ngFor="let filter of filtres" [value]="filter.id">
-            {{ filter.name }}
-          </option>
-        </select>
-
-
-      </label>
+      </app-search-bar>
     </div>
-  </app-search-bar>
+  </div>
 
-  <h1 class="text-2xl font-medium mb-6">Suggestions pour vous</h1>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+  <h1 class="text-2xl font-medium mt-6  mb-6">Suggestions pour vous</h1>
+
+  <div class="  w-full md:w-[80%] mt-6 grid grid-cols-1 lg:grid-cols-2 gap-8">
     <app-card-ballade
       *ngFor="let b of filteredBallades"
       (click)="showBalladeDetail(b)"
       [title]="b.titre"
       [content]="b.description"
       [imageUrl]="b.image"
-      class="cursor-pointer transform hover:scale-105 transition-transform duration-300">
+      class="cursor-pointer w-full transform hover:scale-105 transition-transform duration-300">
     </app-card-ballade>
   </div>
 </div>
@@ -52,7 +46,7 @@
          class="w-full h-64 object-cover">
   </div>
 
-  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
+  <div class="flex  flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
     <div class="flex space-x-2">
       <button mat-button class="rounded-full border border-gray-300 flex flex-col justify-center items-center gap-1">
         <mat-icon fontIcon="map">straighten</mat-icon>

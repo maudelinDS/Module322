@@ -6,9 +6,7 @@
   <app-search-bar (searchChange)="onSearchChanged($event)">
     <div filter-options>
       <label class="block mb-2">
-        <span class="text-sm text-gray-600">Filtres</span>
         <select class="w-full border rounded p-2">
-          <option value="">Tous</option>
           <option *ngFor="let filter of filtres" [value]="filter.id">
             {{ filter.name }}
           </option>

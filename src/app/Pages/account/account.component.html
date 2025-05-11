@@ -1,4 +1,4 @@
-<div class="p-12 h-full flex flex-col md:justify-between">
+<div class="p-6 w-full h-screen flex flex-col md:justify-between">
   <p class="md:hidden w-full text-center mb-4 text-3xl font-medium">Vestigia</p>
   <div class="w-full md:h-full flex flex-col md:justify-between   rounded-2xl   space-y-4" *ngIf="userForm">
 
@@ -7,7 +7,7 @@
       <!-- Cercle avec première lettre -->
       <div class="w-full flex flex-row items-center gap-4">
 
-        <div class="flex flex-row items-center justify-center gap-4 p-4 rounded-lg shadow-lg">
+        <div class="w-full md:w-[312px] flex flex-row items-center justify-start gap-4 p-4 rounded-lg shadow-lg">
           <div
             class="w-12 h-12 rounded-full bg-[#EADDFF] text-white flex items-center justify-center text-lg font-bold uppercase">
             {{ user.username?.charAt(0) }}
@@ -20,8 +20,8 @@
       </div>
 
       <!-- Bouton de sauvegarde -->
-      <div class="hidden md:block">
-        <button mat-flat-button color="primary" type="submit" (click)="updateUser()">
+      <div class="w-1/2 hidden md:flex md:flex-row md:justify-center ">
+        <button mat-flat-button class="#ECE6F0" type="submit" (click)="updateUser()">
           <mat-icon class="mr-2">edit</mat-icon>
           Sauvegarder
         </button>
@@ -30,9 +30,9 @@
 
 
     <!-- Formulaire -->
-    <form [formGroup]="userForm" class="h-full mt-6 flex  md:justify-between md:flex-row flex-wrap ">
-      <div class="flex flex-col  md:justify-between md:h-full w-full md:w-1/3 ">
-        <mat-form-field appearance="fill" class="w-full">
+    <form [formGroup]="userForm" class="h-full mt-6 flex   md:justify-between md:flex-row flex-wrap ">
+      <div class="flex flex-col  justify-between  w-full md:w-1/3 ">
+        <mat-form-field appearance="fill" class="w-full md:w-[336.21px]">
           <mat-label>Prénom</mat-label>
           <input matInput formControlName="first_name"/>
         </mat-form-field>
@@ -44,12 +44,12 @@
                 </mat-form-field>
         -->
 
-        <mat-form-field appearance="fill" class="w-full">
+        <mat-form-field appearance="fill" class="w-full md:w-[336.21px]">
           <mat-label>Pays</mat-label>
           <input matInput formControlName="Pays"/>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" class="w-full">
+        <mat-form-field appearance="fill" class="w-full md:w-[336.21px]">
           <mat-label>Téléphone</mat-label>
           <input matInput formControlName="Phone"/>
         </mat-form-field>
@@ -66,23 +66,23 @@
       </div>
 
       <div class="flex flex-col md:justify-between md:h-full w-full md:w-1/3">
-        <mat-form-field appearance="fill" class="w-full">
+        <mat-form-field appearance="fill" class="w-full md:w-[336.21px]">
           <mat-label>Nom</mat-label>
           <input matInput formControlName="last_name"/>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" class="w-full">
+        <mat-form-field appearance="fill" class="w-full md:w-[336.21px]">
           <mat-label>Genre</mat-label>
           <input matInput formControlName="genre"/>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" class="w-full">
+        <mat-form-field appearance="fill" class="w-full md:w-[336.21px]">
           <mat-label>Langue</mat-label>
           <input matInput formControlName="langue"/>
         </mat-form-field>
       </div>
       <div class=" md:hidden w-full flex justify-center items-center">
-        <button mat-flat-button color="primary" class="w-[60%]" type="submit" (click)="updateUser()">
+        <button   class="flex flex-row items-center justify-center w-[60%] p-2 rounded-xl bg-[#ECE6F0] text-[#65558F]"  type="submit" (click)="updateUser()">
           <mat-icon class="mr-2">edit</mat-icon>
           Sauvegarder
         </button>
