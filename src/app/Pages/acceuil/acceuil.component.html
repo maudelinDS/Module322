@@ -13,45 +13,57 @@
 </div>
 
 
-
-
-
 <!-- LISTE PRINCIPALE -->
 <div *ngIf="!showCardDetail" class="p-6  h-full mb-24 flex flex-col md:justify-between">
   <p class="md:hidden w-full text-center mb-4 text-3xl font-medium">Vestigia</p>
-  <div class="w-full flex items-center justify-center">
+  <div class="md:w-[80%]">
+    <div class="w-full flex items-center justify-center">
 
-    <div class="md:w-[80%] w-[90%]">
-      <app-search-bar
-        [filters]="filtres"
-        (searchChange)="handleSearch($event)"
-        (filterChange)="handleFilters($event)"
-        class=" ">
+      <div class="md:w-[80%] w-[90%]">
+        <app-search-bar
+          [filters]="filtres"
+          (searchChange)="handleSearch($event)"
+          (filterChange)="handleFilters($event)"
+          class=" ">
 
-        >
-      </app-search-bar>
+          >
+        </app-search-bar>
+      </div>
+    </div>
+
+
+    <h1 class="text-2xl font-medium mt-6  mb-6">Suggestions pour vous</h1>
+
+    <div class="  w-full  mt-6 grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <app-card-ballade
+        *ngFor="let b of filteredBallades"
+        (click)="showBalladeDetail(b)"
+        [title]="b.titre"
+        [content]="b.description"
+        [imageUrl]="b.image"
+        class="cursor-pointer w-full transform hover:scale-105 transition-transform duration-300">
+      </app-card-ballade>
     </div>
   </div>
-
-
-  <h1 class="text-2xl font-medium mt-6  mb-6">Suggestions pour vous</h1>
-
-  <div class="  w-full md:w-[80%] mt-6 grid grid-cols-1 lg:grid-cols-2 gap-8">
-    <app-card-ballade
-      *ngFor="let b of filteredBallades"
-      (click)="showBalladeDetail(b)"
-      [title]="b.titre"
-      [content]="b.description"
-      [imageUrl]="b.image"
-      class="cursor-pointer w-full transform hover:scale-105 transition-transform duration-300">
-    </app-card-ballade>
-  </div>
 </div>
+<app-ballade-detail
+  [ballade]="selectedBallades"
+  [visible]="showCardDetail"
+  (close)="showCardDetail = false"
+  (toggleFavorite)="toggleFavorite()">
+  <app-list-ballades
+    other-list
+    [ballades]="otherBallades"
+    (selected)="showBalladeDetail($event)">
+  </app-list-ballades>
+</app-ballade-detail>
 
-<!-- DÉTAIL DE LA BALLADE SÉLECTIONNÉE -->
+<!-- le reste du template pour la liste principale, la search-bar, etc. -->
+
+<!--&lt;!&ndash; DÉTAIL DE LA BALLADE SÉLECTIONNÉE &ndash;&gt;
 <div *ngIf="showCardDetail" class="p-6 w-full mx-auto space-y-6">
 
-  <div  class=" mb-4">
+  <div class=" mb-4">
     <button mat-icon-button (click)="showCardDetail = false">
       <mat-icon>arrow_back</mat-icon>
     </button>
@@ -65,36 +77,37 @@
          class="w-full h-64 md:h-[356px] object-cover">
   </div>
 
-  <div class="flex items-center w-full mb-12 mt-12 flex-col sm:flex-row sm:items-center sm:justify-between  sm:space-y-0">
+  <div
+    class="flex items-center w-full mb-12 mt-12 flex-col sm:flex-row sm:items-center sm:justify-between  sm:space-y-0">
     <div class="w-full flex flex-wrap gap-4  text-[#49454F]">
-      <div  class="p-1 rounded-lg border border-gray-300 flex flex-row justify-center items-center gap-2">
+      <div class="p-1 rounded-lg border border-gray-300 flex flex-row justify-center items-center gap-2">
         <mat-icon>directions_walk</mat-icon>
         {{ selectedBallades.km }} Km
       </div>
-      <div  class="p-1 rounded-lg border border-gray-300 flex flex-row justify-center items-center gap-2">
+      <div class="p-1 rounded-lg border border-gray-300 flex flex-row justify-center items-center gap-2">
         <mat-icon>place</mat-icon>
         {{ selectedBallades.place }}
       </div>
-      <div  class="p-1 rounded-lg border border-gray-300 flex flex-row justify-center items-center gap-2">
+      <div class="p-1 rounded-lg border border-gray-300 flex flex-row justify-center items-center gap-2">
         <mat-icon>access_time</mat-icon>
         {{ selectedBallades.date }}
       </div>
-      <div  class="p-1 rounded-lg border border-gray-300 flex flex-row justify-center items-center gap-2">
+      <div class="p-1 rounded-lg border border-gray-300 flex flex-row justify-center items-center gap-2">
         <mat-icon>calendar_today</mat-icon>
         {{ selectedBallades.open }}
       </div>
     </div>
 
-<div class="w-full flex justify-end md:mt-8 mt-12">
-  <button
-    class="bg-[#65558F] px-3 py-2 text-white rounded-full flex items-center gap-2"
-    (click)="toggleFavorite()">
-    <mat-icon [color]="selectedBallades.favoris ? 'warn' : ''">
-      {{ selectedBallades.favoris ? 'favorite' : 'favorite_border' }}
-    </mat-icon>
-    {{ selectedBallades.favoris ? 'Supprimer des favoris' : 'Ajouter' }}
-  </button>
-</div>
+    <div class="w-full flex justify-end md:mt-8 mt-12">
+      <button
+        class="bg-[#65558F] px-3 py-2 text-white rounded-full flex items-center gap-2"
+        (click)="toggleFavorite()">
+        <mat-icon [color]="selectedBallades.favoris ? 'warn' : ''">
+          {{ selectedBallades.favoris ? 'favorite' : 'favorite_border' }}
+        </mat-icon>
+        {{ selectedBallades.favoris ? 'Supprimer des favoris' : 'Ajouter' }}
+      </button>
+    </div>
   </div>
 
   <div class="space-y-4">
@@ -123,4 +136,4 @@
       (selected)="showBalladeDetail($event)">
     </app-list-ballades>
   </div>
-</div>
+</div>-->

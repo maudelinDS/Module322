@@ -10,20 +10,19 @@ import {Ballades, BalladesService} from '../../services/ballades/ballades.servic
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {MatIcon} from '@angular/material/icon';
 import {Filtres, FiltresService} from '../../services/filtres/filtres.service';
+import {BalladeDetailComponent} from '../../composants/ballade-detail/ballade-detail.component';
 
 @Component({
   selector: 'app-favoris',
   imports: [
     CardBalladeComponent,
     ListBalladesComponent,
-    MatButton,
-    MatCard,
-    MatIcon,
-    MatIconButton,
-    MatToolbar,
+
     NgForOf,
     NgIf,
     SearchBarComponent,
+    BalladeDetailComponent,
+    MatIcon,
   ],
   templateUrl: './favoris.component.html',
   styleUrl: './favoris.component.css'
@@ -37,6 +36,9 @@ export class FavorisComponent implements  OnInit{
   selectedBallades!: Ballades;
   mapUrl!: SafeResourceUrl;
   isLoading: boolean = false
+
+  showOverlay = false;
+  overlayMessage = '';
 
   constructor(
     private balladesService: BalladesService,
@@ -75,6 +77,10 @@ export class FavorisComponent implements  OnInit{
       .updateBalladeFull(this.selectedBallades)
       .subscribe(updated => {
         this.selectedBallades = updated;
+        this.getFavorisBallades()
+        this.getFilters()
+        this.otherBallades
+
       });
 
   }
@@ -104,4 +110,14 @@ export class FavorisComponent implements  OnInit{
       b.description.toLowerCase().includes(lowerQuery)
     );
   }
+
+
+  handleSearch(query: string) {
+    console.log('Recherche :', query);
+  }
+
+  handleFilters(filters: Record<string, any>) {
+    console.log('Filtres reçus du composant enfant :', filters);
+  }
+
 }

@@ -10,6 +10,7 @@ import {ListBalladesComponent} from '../../composants/list-ballades/list-ballade
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {MatCardModule} from '@angular/material/card';
 import {Filtres, FiltresService} from '../../services/filtres/filtres.service';
+import {BalladeDetailComponent} from '../../composants/ballade-detail/ballade-detail.component';
 
 @Component({
   selector: 'app-acceuil',
@@ -18,18 +19,16 @@ import {Filtres, FiltresService} from '../../services/filtres/filtres.service';
     CardBalladeComponent,
     NgForOf,
     NgIf,
-    MatIconButton,
     MatIcon,
     ListBalladesComponent,
-    MatCardModule
+    MatCardModule,
+    BalladeDetailComponent
   ],
   templateUrl: './acceuil.component.html',
   styleUrl: './acceuil.component.css'
 })
 export class AcceuilComponent implements OnInit {
-  iconSize = 64;        // en pixels
-  iconName = 'favorite_border';
-  // Pour piloter l'affichage de l'overlay
+
   showOverlay = false;
   overlayMessage = '';
   ballades: Ballades[] = [];
@@ -119,7 +118,7 @@ export class AcceuilComponent implements OnInit {
     this.showOverlay = true;
     setTimeout(() => {
       this.showOverlay = false;
-    }, 2000);
+    }, 1500);
   }
 
 

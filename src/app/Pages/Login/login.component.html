@@ -31,9 +31,9 @@
           </mat-form-field>
         </div>
 
-        <button mat-raised-button color="primary" type="submit"
+        <button  type="submit"
                 [disabled]="loginForm.invalid"
-                class="w-[40%] py-2 rounded bg-blue-600 hover:bg-blue-700 text-white font-semibold">
+                class="w-[40%] py-2 rounded-full bg-[#65558F] hover:bg-blue-700 text-white font-medium">
           Login
         </button>
         <div *ngIf="errorMsg" class="text-red-600 mt-2">{{ errorMsg }}</div>
