@@ -1,0 +1,69 @@
+<div *ngIf="visible" class="p-6 w-full mx-auto space-y-6">
+  <!-- bouton retour -->
+  <div class="mb-4">
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </div>
+
+  <!-- titre -->
+  <div class="ml-2 mt-6 text-2xl font-medium">{{ ballade.titre }}</div>
+
+  <!-- image -->
+  <div class="bg-white rounded-xl shadow-lg overflow-hidden mt-6">
+    <img [src]="ballade.image" alt="{{ ballade.titre }}"
+         class="w-full h-64 md:h-[356px] object-cover">
+  </div>
+
+  <!-- infos -->
+  <div class="flex  w-full mb-12 mt-12 md:flex-row flex-col sm:justify-between">
+    <div class="flex flex-row items-center  text-sm flex-wrap gap-4 text-[#49454F]">
+      <div class="inline-flex items-center gap-2 p-1 rounded-lg border border-gray-300">
+        <mat-icon>directions_walk</mat-icon>
+        {{ ballade.km }} Km
+      </div>
+
+      <div class="inline-flex items-center gap-2 p-1 rounded-lg border border-gray-300">
+        <mat-icon>place</mat-icon>
+        {{ ballade.place }}
+      </div>
+      <div class="inline-flex items-center gap-2 p-1 rounded-lg border border-gray-300">
+        <mat-icon>access_time</mat-icon>
+        {{ ballade.date }}
+      </div>
+      <div class="inline-flex items-center gap-2 p-1 rounded-lg border border-gray-300">
+        <mat-icon>calendar_today</mat-icon>
+        {{ ballade.open }}
+      </div>
+    </div>
+    <div class="flex flex-row justify-end items-center md:mt-0 md:mb-0 mb-2 mt-12">
+      <button class="bg-[#65558F] px-3 py-2 text-white rounded-full flex items-center gap-2"
+              (click)="onToggleFavorite()">
+        <mat-icon [color]="ballade.favoris ? 'warn' : ''">
+          {{ ballade.favoris ? 'favorite' : 'favorite_border' }}
+        </mat-icon>
+        {{ ballade.favoris ? 'Supprimer des favoris' : 'Ajouter' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- description + carte -->
+  <div class="space-y-4">
+    <h3 class="text-2xl font-medium">Plus d'informations</h3>
+    <p class="mt-4 mb-8 text-gray-700">{{ ballade.description }}</p>
+    <mat-card class="overflow-hidden shadow-md">
+      <iframe class="w-full md:h-[366px] h-64" frameborder="0" style="border:0"
+              [src]="mapUrl" allowfullscreen>
+      </iframe>
+    </mat-card>
+  </div>
+
+  <!-- autres ballades via projection -->
+  <div class="mt-20 mb-20">
+    <h3 class="text-2xl flex items-center gap-2 font-medium mb-6">
+      Autres Ballades
+      <mat-icon>arrow_right_alt</mat-icon>
+    </h3>
+    <ng-content select="[other-list]"></ng-content>
+  </div>
+</div>

@@ -65,7 +65,7 @@
       "place": "Sion",
       "open": "24/7",
       "date": "03/06/1881",
-      "favoris": true,
+      "favoris": false,
       "filter_id": 1
     },
     {
@@ -77,7 +77,7 @@
       "place": "Morges",
       "open": "24/7",
       "date": "03/06/1889",
-      "favoris": false,
+      "favoris": true,
       "filter_id": 2
     },
     {
@@ -101,7 +101,7 @@
       "place": "Bâle",
       "open": "24/7",
       "date": "05/09/1900",
-      "favoris": false,
+      "favoris": true,
       "filter_id": 3
     }
   ]
