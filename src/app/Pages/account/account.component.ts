@@ -49,8 +49,8 @@ export class AccountComponent implements OnInit {
           email: [user.email],
           genre: [user.genre],
           langue: [user.langue],
-          Pays: [user.pays],
-          Phone: [user.phone],
+          pays: [user.pays],
+          phone: [user.phone],
           username: [user.username],
           password: [user.password]
         });
@@ -82,7 +82,7 @@ export class AccountComponent implements OnInit {
         next: (data) => {
           this.user = data
           this.isLoading = false
-
+console.log(data)
         },
         error: err => {
           this.isLoading = false
