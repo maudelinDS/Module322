@@ -36,7 +36,8 @@ export class FavorisComponent implements  OnInit{
   selectedBallades!: Ballades;
   mapUrl!: SafeResourceUrl;
   isLoading: boolean = false
-
+  currentQuery: string = '';
+  currentFilters: Record<string, any> = {};
   showOverlay = false;
   overlayMessage = '';
 
@@ -112,12 +113,46 @@ export class FavorisComponent implements  OnInit{
   }
 
 
+// AcceuilComponent.ts
   handleSearch(query: string) {
-    console.log('Recherche :', query);
+    this.currentQuery = query.toLowerCase().trim();
+    this.applySearchAndFilters();
   }
 
   handleFilters(filters: Record<string, any>) {
-    console.log('Filtres reçus du composant enfant :', filters);
+    this.currentFilters = filters;
+    this.applySearchAndFilters();
   }
+// AcceuilComponent.ts
+// AcceuilComponent.ts
+
+  private applySearchAndFilters() {
+    // 1. on part de la liste complète
+    let result = [...this.favoris];
+
+    // 2. recherche texte (titre + description)
+    if (this.currentQuery) {
+      result = result.filter(b =>
+        b.titre.toLowerCase().includes(this.currentQuery) ||
+        b.description.toLowerCase().includes(this.currentQuery)
+      );
+    }
+
+    // 3. filtrage par ID de filtre
+    // currentFilters est de la forme { "3": "3", "4": "4", ... }
+    const activeFilterIds = Object.values(this.currentFilters)
+      .filter(v => v != null && v !== '')
+      .map(v => Number(v));
+
+    if (activeFilterIds.length) {
+      result = result.filter(b =>
+        activeFilterIds.includes(b.filter_id)
+      );
+    }
+
+    // 4. on met à jour
+    this.filteredFavoris = result;
+  }
+
 
 }
