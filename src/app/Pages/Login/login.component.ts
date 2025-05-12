@@ -19,7 +19,6 @@ import {MatIcon} from '@angular/material/icon';
     MatInputModule,
     MatButtonModule,
     NgIf,
-    MatIcon,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],

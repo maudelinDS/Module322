@@ -8,7 +8,6 @@ import {Router} from '@angular/router';
   selector: 'app-not-found',
   imports: [
     MatIcon,
-    MatButton,
   ],
   templateUrl: './not-found.component.html',
   styleUrl: './not-found.component.css'
