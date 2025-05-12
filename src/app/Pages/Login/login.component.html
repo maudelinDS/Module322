@@ -10,22 +10,18 @@
       <mat-card-title class="w-full text-2xl font-bold flex-1 md:text-center mb-4">Login</mat-card-title>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="w-full md:w-1/2 flex flex-col justify-center items-center h-full">
         <div class="mb-4 w-full">
-          <mat-form-field appearance="fill" class="w-full">
-            <mat-label>Nom d'utilisateur</mat-label>
-            <input matInput formControlName="username" autocomplete="username" type="text" class="p-2 border rounded"/>
-            <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
-              Le nom d'utilisateur est requis
-            </mat-error>
-            <mat-error *ngIf="loginForm.get('username')?.hasError('username')">
-              Le nom d'utilisateur invalide
-            </mat-error>
+          <mat-form-field appearance="fill" class="w-full" style="--mat-form-field-fill-background: red;">
+            <mat-label>Nom d’utilisateur</mat-label>
+            <input matInput formControlName="username" type="text" class="p-2 border rounded text-center"/>
           </mat-form-field>
+
+
         </div>
 
         <div class="mb-6 w-full">
           <mat-form-field appearance="fill" class="w-full">
             <mat-label>Mot de passe</mat-label>
-            <input matInput formControlName="password" autocomplete="current-password" type="password" class="p-2 border rounded"/>
+            <input matInput formControlName="password" autocomplete="current-password" type="password" class="p-2 border rounded text-center"/>
             <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
               Le mot de passe est requis
             </mat-error>

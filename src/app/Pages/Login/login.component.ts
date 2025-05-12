@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, Validators, ReactiveFormsModule, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MatCardModule} from '@angular/material/card';
@@ -7,6 +7,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {NgIf} from '@angular/common';
 import {AuthService} from '../../services/auth/auth.service';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-login',
@@ -18,9 +19,12 @@ import {AuthService} from '../../services/auth/auth.service';
     MatInputModule,
     MatButtonModule,
     NgIf,
+    MatIcon,
   ],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  encapsulation: ViewEncapsulation.None
+
 })
 export class LoginComponent implements OnInit{
   loginForm!: FormGroup;

@@ -18,10 +18,8 @@ import {Filtres, FiltresService} from '../../services/filtres/filtres.service';
     CardBalladeComponent,
     NgForOf,
     NgIf,
-    MatToolbar,
     MatIconButton,
     MatIcon,
-    MatButton,
     ListBalladesComponent,
     MatCardModule
   ],
@@ -29,7 +27,11 @@ import {Filtres, FiltresService} from '../../services/filtres/filtres.service';
   styleUrl: './acceuil.component.css'
 })
 export class AcceuilComponent implements OnInit {
-
+  iconSize = 64;        // en pixels
+  iconName = 'favorite_border';
+  // Pour piloter l'affichage de l'overlay
+  showOverlay = false;
+  overlayMessage = '';
   ballades: Ballades[] = [];
   filtres: Filtres[] = [];
   filteredBallades: Ballades[] = [];
@@ -51,11 +53,13 @@ export class AcceuilComponent implements OnInit {
     this.getFilters()
     this.getBallades()
   }
+
   myFilters = [
-    { key: 'genre', label: 'Genre', type: 'select', options: ['Rock', 'Jazz'], value: '' },
-    { key: 'auteur', label: 'Auteur', type: 'text', value: '' },
-    { key: 'date', label: 'Date', type: 'date', value: '' }
+    {key: 'genre', label: 'Genre', type: 'select', options: ['Rock', 'Jazz'], value: ''},
+    {key: 'auteur', label: 'Auteur', type: 'text', value: ''},
+    {key: 'date', label: 'Date', type: 'date', value: ''}
   ];
+
   getFilters() {
     this.isLoading = true
     this.filterService.getFiltres().subscribe((data: Filtres[]) => {
@@ -95,13 +99,27 @@ export class AcceuilComponent implements OnInit {
   toggleFavorite() {
     // inverse localement
     this.selectedBallades.favoris = !this.selectedBallades.favoris;
+
     // Envoie l'objet complet à l'API
     this.balladesService
       .updateBalladeFull(this.selectedBallades)
       .subscribe(updated => {
         this.selectedBallades = updated;
-      });
 
+        // Affiche le message
+        const action = this.selectedBallades.favoris ? 'ajouté aux favoris' : 'supprimé des favoris';
+        this.showTemporaryOverlay(`Votre balade a été
+ ${action}`);
+      });
+  }
+
+  /** Affiche un overlay avec le message donné pendant 3 s */
+  private showTemporaryOverlay(msg: string) {
+    this.overlayMessage = msg;
+    this.showOverlay = true;
+    setTimeout(() => {
+      this.showOverlay = false;
+    }, 2000);
   }
 
 

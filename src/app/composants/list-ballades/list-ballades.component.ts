@@ -5,6 +5,7 @@ import {UserService, Utilisateur} from '../../services/users/users.service';
 import {Ballades, BalladesService} from '../../services/ballades/ballades.service';
 import {MatLine} from '@angular/material/core';
 import {MatIcon} from '@angular/material/icon';
+import {MatIconButton} from '@angular/material/button';
 
 @Component({
   selector: 'app-list-ballades',
@@ -16,6 +17,7 @@ import {MatIcon} from '@angular/material/icon';
     NgForOf,
     MatIcon,
     MatLine,
+    MatIconButton,
   ],
   templateUrl: './list-ballades.component.html',
   styleUrl: './list-ballades.component.css'

@@ -1,12 +1,43 @@
-<mat-list class="text-gray-600">
-  <mat-list-item *ngFor="let u of ballades" (click)="onSelect(u)" class="cursor-pointer">
-    <mat-icon matListIcon>person</mat-icon>
-    <div class="flex flex-row gap-6 py-4 justify-between w-full">
-      <img [src]="u.image" alt="{{ u.titre }}" class="w-16 h-16 object-cover rounded-md">
-      <div class="flex-1 text-xs">
-        <h4 matLine class="font-semibold">{{ u.titre }}</h4>
-        <small matLine class="text-gray-500">{{ u.description }}</small>
+<div class="w-full">
+  <mat-list class=" text-gray-600">
+    <mat-list-item
+      *ngFor="let u of ballades"
+      (click)="onSelect(u)"
+      class="cursor-pointer mb-4 w-full"
+    >
+      <mat-icon matListIcon>person</mat-icon>
+      <div class="flex flex-row justify-between gap-4    w-full">
+        <div class="flex flex-row  gap-4    w-full">
+          <img [src]="u.image" alt="{{ u.titre }}" class="w-16 h-16 object-cover ">
+          <div class="w-1/2 flex flex-row  justify-between">
+            <div class="w-full      max-w-[200px]    whitespace-normal
+    break-words   flex flex-col text-xs">
+              <h4 matLine class="font-semibold">{{ u.titre }}</h4>
+              <small
+                matLine
+                class="
+    text-gray-500
+      /* casse les mots trop longs */
+  "
+              >
+                {{ u.description }}
+              </small>
+            </div>
+
+
+          </div>
+        </div>
+        <button
+          mat-icon-button
+          aria-label="Plus d’options"
+          (click)="$event.stopPropagation()"
+        >
+          <mat-icon>more_vert</mat-icon>
+        </button>
+
+
       </div>
-    </div>
-  </mat-list-item>
-</mat-list>
+    </mat-list-item>
+  </mat-list>
+
+</div>
